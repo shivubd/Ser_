@@ -1,1 +1,1 @@
-# Ser_
+# Speech emotion recognition - Major Project
