@@ -25,8 +25,19 @@
     </nav>
     <div id="uploadBox">
         <div class="wrapper">
-            <header style="font-weight:lighter;">Prediction for {{ filename }}</header>
-            <header style="margin-top: 3%;">{{ pred }}</header>
+            <header style="font-weight:lighter;margin-bottom: 3%;">Prediction for {{ filename }}</header>
+            <div id="rcorners2">
+                <header style="font-weight:light;font-size: large;">SVC Result (Accuracy-69.70%)</header>
+                <header style="font-size:xx-large;">{{ pred[0] }}</header>
+            </div>
+            <div id="rcorners2">
+                <header style="font-weight:light;font-size: large; margin-top: 2%;">RandomForest Result (Accuracy-84.85%)</header>
+                <header style="font-size:xx-large;">{{ pred[1] }}</header>
+            </div>
+            <div id="rcorners2">
+                <header style="font-weight:light;font-size: large; margin-top: 2%;">MLP Classifier Result (Accuracy-87.88%)</header>
+                <header style="font-size: xx-large;">{{ pred[2] }}</header>
+            </div>
             <header><button id="uploadButton" type="button" class="btn btn-secondary d-grid gap-2 col-6 mx-auto" onclick="location.href='/'" style="margin-top: 5%;">HOME</button></header>      
         </div>
     </div>

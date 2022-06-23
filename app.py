@@ -10,7 +10,10 @@ ALLOWED_EXTENSIONS = {'wav'}
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-model = pickle.load(open('ser.pkl','rb'))
+modelSVC = pickle.load(open('svc.pkl','rb'))
+modelRF = pickle.load(open('rf.pkl','rb'))
+modelMLP = pickle.load(open('mlp.pkl','rb'))
+
 def extract_feature(file_name, mfcc, chroma, mel):
     with soundfile.SoundFile(file_name) as sound_file:
         X = sound_file.read(dtype="float32")
@@ -45,12 +48,14 @@ def home():
         #Prediction
         x,y = [],[]
         feature=extract_feature(save_file, mfcc=True, chroma=True, mel=True)
-        pred = model.predict(np.array([feature]))
-        data['file'],data['prediction']=str(filename),pred[0].upper()
+        predSVC = modelSVC.predict(np.array([feature]))
+        predRF = modelRF.predict(np.array([feature]))
+        predMLP = modelMLP.predict(np.array([feature]))
+        data['file'],data['prediction']=str(filename),[predSVC[0].upper(),predRF[0].upper(),predMLP[0].upper()]
         
         #After prediction the file gets deleted from /uploads
         os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    
+        
     return render_template('website.html')
 
 @app.route('/result')
