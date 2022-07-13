@@ -62,3 +62,6 @@ accuracy=accuracy_score(y_true=y_test, y_pred=y_pred)
 
 #Print the accuracy
 print("Accuracy(MLP): {:.2f}%".format(accuracy*100))
+from sklearn.metrics import confusion_matrix
+cf_matrix = confusion_matrix(y_test, y_pred)
+print(cf_matrix)
